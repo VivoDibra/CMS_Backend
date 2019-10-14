@@ -17,4 +17,5 @@
 const Route = use('Route')
 
 Route.get('/', () => { return { message: 'API rodando!' }})
-Route.post('/sessions', 'SessionController.Store')
+Route.post('/sessions', 'SessionController.Authenticate')
+Route.post('/forgot', 'SessionController.ResetPassword')
