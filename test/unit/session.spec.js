@@ -1,0 +1,29 @@
+'use strict'
+
+const { test, trait } = use('Test/Suite')('Session')
+
+/** @type {import('@adonisjs/lucid/src/Factory')} */
+const Factory = use('Factory')
+
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')*/
+const user = use('App/Models/User')
+
+trait('Test/ApiClient')
+
+test('it should return a JWT token', async ({ client, assert }) => {
+
+  const staticCredencials = {
+    email: 'voitilaaraujo@gmail.com',
+    password: '123456'
+  }
+
+  const newUser = await Factory.model('App/Models/User').create(staticCredencials)
+
+  const response = await client
+    .post('/sessions')
+    .send(staticCredencials)
+    .end()
+
+  response.assertStatus(200)
+  assert.exists(response.body)
+})
