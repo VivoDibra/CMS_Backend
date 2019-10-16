@@ -24,5 +24,5 @@ test('it should return a JWT token', async ({ client, assert }) => {
     .end()
 
   response.assertStatus(200)
-  assert.exists(response.body)
+  assert.exists(response.body.token)
 })

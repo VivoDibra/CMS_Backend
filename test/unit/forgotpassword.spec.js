@@ -32,9 +32,9 @@ test('it should send reset password instructions to user email', async ({
     .send(staticCredencials)
     .end()
   const recentEmail = Mail.pullRecent()
-
+  
   assert.equal(recentEmail.message.to[0].address, staticCredencials.email)
-  response.assertStatus(200)
+  response.assertStatus(204)
 
   Mail.restore()
 })

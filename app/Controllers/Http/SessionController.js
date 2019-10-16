@@ -16,20 +16,23 @@ class SessionController {
 
   async ResetPassword({ request }) {
     const { email } = request.only(['email'])
-    const exists = await user.findBy('email', email)
+    
+    try {
+      const usuario = await user.findByOrFail('email', email)
 
-    if (null != exists) {
-      await Mail.raw('<h1>Email ao mundo!</h1>', message => {
-        message.from('voitilaaraujo@gmail.com', ['Voitila'])
-        message.to(email)
-        message.subject('Reset password')
-      })
+      await Mail.send(
+        'emails.forgotpassword',
+        { name: usuario.fullname },
+        message => {
+          message.from('CTEEP@gmail.com.br', 'CTEEP Monitor System')
+          message.to(usuario.email, usuario.fullname)
+          message.subject('CTEEP Monitor System - Reset password')
+        }
+      )
+    } catch (err) {
       return {
-        message: 'Email de reset enviado'
-      }
-    } else {
-      return {
-        message: 'Nenhuma conta foi encontrada com o email fornecido.'
+        message:
+          'Não foi possivel encontrar no sistema um usuário com o email fornecido.'
       }
     }
   }
