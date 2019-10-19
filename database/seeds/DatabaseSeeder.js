@@ -14,7 +14,13 @@
 const Factory = use('Factory')
 
 class DatabaseSeeder {
-  async run () {
+  async run() {
+    const staticCredencials = {
+      email: 'usuario@gmail.com',
+      password: '123456'
+    }
+    
+    await Factory.model('App/Models/User').create(staticCredencials)
   }
 }
 

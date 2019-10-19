@@ -28,11 +28,16 @@ class User extends Model {
    * tokens table.
    *
    * @method tokens
+   * @method issues
    *
    * @return {Object}
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  issues () {
+    return this.hasMany('App/Models/Issues')
   }
 }
 
