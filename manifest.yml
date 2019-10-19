@@ -1,0 +1,8 @@
+applications:
+  - name: CTEEP_API
+    instances: 1
+    memory: 512MB
+    random-route: true
+    command: npm start
+    buildpacks:
+      - nodejs_buildpack

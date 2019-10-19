@@ -16,10 +16,14 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => { return { message: 'API rodando!' }})
+Route.get('/', () => {
+  return { message: 'API rodando!' }
+})
 
 Route.post('/sessions', 'SessionController.Authenticate')
 Route.post('/forgot', 'SessionController.ResetEmail')
 Route.post('/reset', 'SessionController.ResetPassword')
 
-Route.get('/monitor', 'MonitoringController.receive')
+Route.group(() => {
+  Route.get('/monitor', 'MonitoringController.receive')
+}).middleware(['auth'])
