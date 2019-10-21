@@ -1,2 +1,2 @@
-web: ENV_SILENT=true node server.js
-release: ENV_SILENT=true node server.js
+web: ENV_SILENT=true adonis serve
+release: ENV_SILENT=true adonis serve
